@@ -16,7 +16,7 @@ template_dir = os.path.join(os.path.dirname(__file__), 'templates')
 jinja_env = jinja2.Environment(loader = jinja2.FileSystemLoader(template_dir),
                                autoescape = True)
 
-secret = 'fart'
+secret = 'imacomputer'
 
 def render_str(template, **params):
     t = jinja_env.get_template(template)
@@ -306,8 +306,6 @@ class JSONHandler(BlogHandler):
                 self.write(json.dumps(self.makeJSON(post), sort_keys = True))
         else:
             self.response.headers['Content-Type'] = 'application/json; charset=UTF-8'
-            # for each post change dict to post attributes
-            # how? run a sql that matches the one from blog handler?
             posts = Post.all().order('-created')
             for post in posts:
                 self.write(json.dumps(self.makeJSON(post), sort_keys = True))
